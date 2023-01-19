@@ -6,6 +6,7 @@
 
 
 </div>
+
 ## LIST OF PROJECTS
 
-- 01: [TWITTER FOLLOW CARD](projects/01-twitter-follow-card/)
+- 01: [Twitter Follow Card](projects/01-twitter-follow-card/)
