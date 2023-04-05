@@ -6,9 +6,17 @@ import { checkWinnerFrom, chenckEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null))
-  console.log(board)
-  const [turn, setTurn] = useState(TURNS.X)
+  const [board, setBoard] = useState(() => {
+    const boardFromStorage = window.localStorage.getItem('board')
+    return boardFromStorage
+      ? JSON.parse(boardFromStorage)
+      : Array(9).fill(null)
+  })
+
+  const [turn, setTurn] = useState(() => {
+    const turnFromStorage = window.localStorage.getItem('turn')
+    return turnFromStorage ?? TURNS.X
+  })
   console.log(turn)
   const [winner, setWinner] = useState(null)
   console.log(winner)
@@ -17,6 +25,9 @@ function App() {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+
+    window.localStorage.removeItem('board')
+    window.localStorage.removeItem('turn')
   }
 
   const updateBoard = (index) => {
@@ -29,12 +40,15 @@ function App() {
     //cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+    // guardar partida en localstorage
+    window.localStorage.setItem('board', JSON.stringify(newBoard))
+    window.localStorage.setItem('turn', newTurn)
     //revisar si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
       confetti()
       setWinner(newWinner)
-    } else if(chenckEndGame(newBoard)) {
+    } else if (chenckEndGame(newBoard)) {
       setWinner(false)
     }
   }
@@ -44,19 +58,19 @@ function App() {
       <h1>Tic tac toe</h1>
       <button onClick={resetGame}>Reset del juego</button>
       <section className="game">
-      {
-        board.map((square, index) => {
-          return (
-            <Square 
-              key={index}
-              index={index}
-              updateBoard={updateBoard}
-            >
-              {square}
-            </Square>  
-          )
-        })
-      }
+        {
+          board.map((square, index) => {
+            return (
+              <Square
+                key={index}
+                index={index}
+                updateBoard={updateBoard}
+              >
+                {square}
+              </Square>
+            )
+          })
+        }
       </section>
 
       <section className="turn">
@@ -65,7 +79,7 @@ function App() {
       </section>
 
       <section>
-        <WinnerModal winner={winner} resetGame={resetGame}/>
+        <WinnerModal winner={winner} resetGame={resetGame} />
       </section>
     </main>
   )
