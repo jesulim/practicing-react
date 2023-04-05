@@ -1,12 +1,12 @@
-import { useState } from "react"
-import confetti from "canvas-confetti"
-import { Square } from "./components/Square"
-import { TURNS } from "./constans"
-import { checkWinnerFrom, chenckEndGame } from "./logic/board"
-import { WinnerModal } from "./components/WinnerModal"
-import { saveGameToStorage, resetGameFromStorage } from "./logic/storage"
+import { useState } from 'react'
+import confetti from 'canvas-confetti'
+import { Square } from './components/Square'
+import { TURNS } from './constans'
+import { checkWinnerFrom, chenckEndGame } from './logic/board'
+import { WinnerModal } from './components/WinnerModal'
+import { saveGameToStorage, resetGameFromStorage } from './logic/storage'
 
-function App() {
+function App () {
   const [board, setBoard] = useState(() => {
     const boardFromStorage = window.localStorage.getItem('board')
     return boardFromStorage
@@ -33,19 +33,19 @@ function App() {
   const updateBoard = (index) => {
     // no actualiza si tiene algo
     if (board[index] || winner) return
-    //actualizar el tablero
+    // actualizar el tablero
     const newBoard = [...board]
     newBoard[index] = turn
     setBoard(newBoard)
-    //cambiar el turno
+    // cambiar el turno
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
-    //guardar en el storage
+    // guardar en el storage
     saveGameToStorage({
       board: newBoard,
       turn: newTurn
     })
-    //revisar si hay ganador
+    // revisar si hay ganador
     const newWinner = checkWinnerFrom(newBoard)
     if (newWinner) {
       confetti()
@@ -56,10 +56,10 @@ function App() {
   }
 
   return (
-    <main className="board">
+    <main className='board'>
       <h1>Tic tac toe</h1>
       <button onClick={resetGame}>Reset del juego</button>
-      <section className="game">
+      <section className='game'>
         {
           board.map((square, index) => {
             return (
@@ -75,7 +75,7 @@ function App() {
         }
       </section>
 
-      <section className="turn">
+      <section className='turn'>
         <Square isSelected={turn === TURNS.X}>{TURNS.X}</Square>
         <Square isSelected={turn === TURNS.O}>{TURNS.O}</Square>
       </section>
