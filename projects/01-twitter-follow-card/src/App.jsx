@@ -5,17 +5,17 @@ const users = [
   {
     userName: 'midudev',
     name: 'Miguel Ángel Durán',
-    isFollowing: true,
+    isFollowing: false,
   },
   {
-    userName: 'pheralb',
-    name: 'Pablo H.',
+    userName: 'jesulim',
+    name: 'Ivan Martinez',
     isFollowing: false
   },
   {
     userName: 'PacoHdezs',
     name: 'Paco Hdez',
-    isFollowing: true
+    isFollowing: false
   },
   {
     userName: 'TMChein',

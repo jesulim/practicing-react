@@ -6,7 +6,7 @@ import { checkWinnerFrom, chenckEndGame } from "./logic/board"
 import { WinnerModal } from "./components/WinnerModal"
 
 function App() {
-  const [board, setBoard] = useState(Array(9).fill(null  ))
+  const [board, setBoard] = useState(Array(9).fill(null))
   console.log(board)
   const [turn, setTurn] = useState(TURNS.X)
   console.log(turn)
