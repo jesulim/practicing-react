@@ -4,6 +4,7 @@ function App () {
   const [enabled, setEnabled] = useState(false)
   const [position, setPosition] = useState({ x: 0, y: 0 })
 
+  // pointer move
   useEffect(() => {
     console.log('efecto', { enabled })
 
@@ -25,6 +26,19 @@ function App () {
       window.removeEventListener('pointermove', handleMove)
     }
   }, [enabled])
+
+  // change body classname
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enabled)
+
+    return () => {
+      document.body.classList.remove('no-cursor')
+    }
+  }, [enabled])
+
+  // [] -> solo se ejecuta una vez
+  // [enabled] -> se ejecuta cada vez que cambia enabled y cuando se monta el componente
+  // undefined -> se ejecuta cada vez que se renderiza el componente
 
   return (
     <main>
