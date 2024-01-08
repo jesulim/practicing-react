@@ -5,7 +5,7 @@ const users = [
   {
     userName: 'midudev',
     name: 'Miguel Ángel Durán',
-    isFollowing: false,
+    isFollowing: false
   },
   {
     userName: 'jesulim',
@@ -26,19 +26,19 @@ const users = [
 
 export function App () {
   return (
-    <section className='App'>
+    <section className='bg-gray-900 text-white h-screen grid place-content-center gap-2'>
       {
         users.map(({ userName, name, isFollowing }) => (
-            <TwitterFollowCard
-              key={userName}
-              userName={userName}
-              initialIsFollowing={isFollowing}
-            >
-              {name}
-            </TwitterFollowCard>
-          )
+          <TwitterFollowCard
+            key={userName}
+            userName={userName}
+            initialIsFollowing={isFollowing}
+          >
+            {name}
+          </TwitterFollowCard>
+        )
         )
       }
     </section>
   )
-} 
+}
