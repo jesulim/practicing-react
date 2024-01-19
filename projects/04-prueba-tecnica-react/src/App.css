@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  max-width: 200px;
+  margin: 0 auto;
+  font-family: system-ui, sans-serif;
+  text-align: center;
+}
+
+section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+section img {
+  max-width: 320px;
+  height: auto;
+}
